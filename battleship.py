@@ -59,78 +59,70 @@ def validate_input_guess():
 			print("Please enter integers 1-5 separated by a space.")
 	return x, y
 
-# creating the game
-p1_board, p1_guesses, p2_board, p2_guesses = init()
+def main():
+	# creating the game
+	p1_board, p1_guesses, p2_board, p2_guesses = init()
 
-# store the boards and guesses so we can get a player's boards by a single index
-boards = [p1_board, p2_board]
-guesses = [p1_guesses, p2_guesses]
-lives = [5, 5]
+	# store the boards and guesses so we can get a player's boards by a single index
+	boards = [p1_board, p2_board]
+	guesses = [p1_guesses, p2_guesses]
+	lives = [5, 5]
 
-# this represents the player turns. 1 = player 1, 2 = player 2
-# the turns switch initially 
-player_turn = 2
+	# this represents the player turns. 1 = player 1, 2 = player 2
+	# the turns switch initially 
+	player_turn = 2
 
 
-print(docstring.__doc__)
-# game goes until a condition breaks it out
-while True:
-	
-	# switch turns
-	if player_turn == 1: 
-		player_turn = 2
-		enemy_board = boards[0]
-		enemy_life_index = 0
-		guess = guesses[1]
+	print(docstring.__doc__)
+	# game goes until a condition breaks it out
+	while True:
+		
+		# switch turns
+		if player_turn == 1: 
+			player_turn = 2
+			enemy_board = boards[0]
+			enemy_life_index = 0
+			guess = guesses[1]
 
-	else:
-		player_turn = 1
-		enemy_board = boards[1]
-		enemy_life_index = 1
-		guess = guesses[0]
+		else:
+			player_turn = 1
+			enemy_board = boards[1]
+			enemy_life_index = 1
+			guess = guesses[0]
 
-	print("WELCOME TO BATTLESHIP! EACH PLAYER WILL PLAY UNTIL SOMEONE HAS SUNK A SHIP! GOOD LUCK!")
-	print(f"Player {player_turn}'s turn! _____________________________")
-	print("These are your guesses currently:")
-	#This will display the board of the other player, including the hits and misses
-	print_board(guess)
-	print()
-	x, y = validate_input_guess()
-
-	# if we've already made that guess, get input again
-	while guess[y-1][x-1] != '-':
+		print("WELCOME TO BATTLESHIP! EACH PLAYER WILL PLAY UNTIL SOMEONE HAS SUNK A SHIP! GOOD LUCK!")
+		print(f"Player {player_turn}'s turn! _____________________________")
+		print("These are your guesses currently:")
+		#This will display the board of the other player, including the hits and misses
+		print_board(guess)
+		print()
 		x, y = validate_input_guess()
 
-	# a hit!
-	if enemy_board[y-1][x-1] == 'b':
+		# if we've already made that guess, get input again
+		while guess[y-1][x-1] != '-':
+			x, y = validate_input_guess()
 
-		enemy_board[y-1][x-1] = '*'
-		guess[y-1][x-1] = '*'
+		# a hit!
+		if enemy_board[y-1][x-1] == 'b':
 
-		#check to see whether that was their last life or not
-		if lives[enemy_life_index] == 1:
-			print(f"~~~Player {player_turn} wins~~~ \n Loser's board: ")
-			print_board(enemy_board)
-			break
+			enemy_board[y-1][x-1] = '*'
+			guess[y-1][x-1] = '*'
 
-		print(f"*** It's a hit! ***{lives[enemy_life_index]}")
+			#check to see whether that was their last life or not
+			if lives[enemy_life_index] == 1:
+				print(f"~~~Player {player_turn} wins~~~ \n Loser's board: ")
+				print_board(enemy_board)
+				break
 
-		lives[enemy_life_index] -= 1
+			print(f"*** It's a hit! ***{lives[enemy_life_index]}")
 
-	else: # a miss
-		guess[y-1][x-1] = 'o'
-		print(f"Player {player_turn} misses!")
-	#*50 will keep the terminal clean and only display what is needed to be displayed .
-	print('\n' * 50)
+			lives[enemy_life_index] -= 1
 
+		else: # a miss
+			guess[y-1][x-1] = 'o'
+			print(f"Player {player_turn} misses!")
+		#*50 will keep the terminal clean and only display what is needed to be displayed .
+		print('\n' * 50)
 
-		
-
-
-
-
-
-
-
-
-
+if __name__ == '__main__':
+	main()
