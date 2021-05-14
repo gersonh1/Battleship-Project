@@ -7,3 +7,4 @@ The ships are randomly assigned for both players and a hit/miss messages display
 This ensures integrity in the game meaning no bluffing of any sort.
 The code was updated to keep the terminal clean and only showing what the player has to see, which is their guessing board.
 Hope you enjoy! Thanks!
+-INST326
