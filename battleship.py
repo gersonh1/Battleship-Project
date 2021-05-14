@@ -1,24 +1,34 @@
 #Coder: Gerson Hernandez, Yafet Kassa
 import random
+def docstring():
+	"""
+	The program has 4 function, print board, rand, init, and validate input guesses
+	Each has its purpose and makes the code possible.
+	print board displays the player's board to console.
+	rand generaes a random number that ranges between any numbers, in our case it's 0 - 4
+	init is used to initialize each board as empty, then fill the board with random coordinates
+	it also makes sure there aren't multiple "ships" on one coordinate
+	It also generates an empty guess for each player. 
+	Validate input guess works as a sense of direction for the players and makes sure each input is valid.
+	If the input is not valid it will redirect them to enter something correct. 
+	"""
+
 # print a player's board to the console
 def print_board(l):
 	print("  1 2 3 4 5 ")
 	for row in range(0, len(l)):
 		print(str(row+1) + ' ' + ' '.join(l[row]))
 
-# we're gonna be using this a bunch
+# generates rand
 def rand():
 	return random.randint(0, 4)
 
-
 # set up the game board and the player/opponent boards and guesses
-def init():
 
+def init():
 	# board is initially empty for both players
 	p1_board = [ ['-' for i in range(0, 5)] for j in range(0, 5) ]
 	p2_board = [ ['-' for i in range(0, 5)] for j in range(0, 5) ]
-
-
 	# populate the game boards with boats
 	for board in [p1_board, p2_board]:
 		for x in range(0, 5):
@@ -37,7 +47,8 @@ def init():
 
 	return (p1_board, p1_guesses, p2_board, p2_guesses)
 
-
+#this function will validate the inputs that each player enters, if it is not in the range it will keep asking them for
+#a correct input
 def validate_input_guess():
 	x, y = -1, -1
 	while not 1 <= x <= 5 or not 1 <= y <= 5:
@@ -61,7 +72,7 @@ lives = [5, 5]
 player_turn = 2
 
 
-
+print(docstring.__doc__)
 # game goes until a condition breaks it out
 while True:
 	
@@ -78,9 +89,10 @@ while True:
 		enemy_life_index = 1
 		guess = guesses[0]
 
-
+	print("WELCOME TO BATTLESHIP! EACH PLAYER WILL PLAY UNTIL SOMEONE HAS SUNK A SHIP! GOOD LUCK!")
 	print(f"Player {player_turn}'s turn! _____________________________")
 	print("These are your guesses currently:")
+	#This will display the board of the other player, including the hits and misses
 	print_board(guess)
 	print()
 	x, y = validate_input_guess()
@@ -108,7 +120,7 @@ while True:
 	else: # a miss
 		guess[y-1][x-1] = 'o'
 		print(f"Player {player_turn} misses!")
-
+	#*50 will keep the terminal clean and only display what is needed to be displayed .
 	print('\n' * 50)
 
 
