@@ -109,7 +109,7 @@ while True:
 		guess[y-1][x-1] = 'o'
 		print(f"Player {player_turn} misses!")
 
-	print('\n' * 5)
+	print('\n' * 50)
 
 
 		
